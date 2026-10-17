@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Munafa Trading — Master the Stock Market</title>
+<meta name="description" content="Professional trading institute. Learn stock market trading with expert mentors, live sessions and proven strategies." />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0f1c;
+    --bg-2:#0f172a;
+    --card:#131c31;
+    --line:rgba(255,255,255,.08);
+    --text:#e8eefb;
+    --muted:#94a3b8;
+    --green:#22c55e;
+    --green-2:#16a34a;
+    --gold:#fbbf24;
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{text-decoration:none;color:inherit}
+  img{max-width:100%;display:block}
+  .wrap{width:min(1160px,92%);margin:0 auto}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(14px);
+    background:rgba(10,15,28,.72);
+    border-bottom:1px solid var(--line);
+  }
+  nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.15rem;letter-spacing:-.02em}
+  .logo-mark{
+    width:38px;height:38px;border-radius:11px;
+    background:linear-gradient(135deg,var(--green),#0ea5e9);
+    display:grid;place-items:center;font-size:1.05rem;color:#06121f;font-weight:800;
+  }
+  .nav-links{display:flex;gap:28px;font-size:.93rem;color:var(--muted);font-weight:500}
+  .nav-links a:hover{color:var(--text)}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:12px 22px;border-radius:12px;font-weight:700;font-size:.92rem;
+    border:1px solid transparent;cursor:pointer;transition:.2s;
+    font-family:inherit;
+  }
+  .btn-primary{background:var(--green);color:#04210f}
+  .btn-primary:hover{background:#2ee06a;transform:translateY(-1px)}
+  .btn-ghost{border-color:var(--line);color:var(--text);background:rgba(255,255,255,.03)}
+  .btn-ghost:hover{background:rgba(255,255,255,.08)}
+  .nav-cta{display:flex;gap:10px;align-items:center}
+  .burger{display:none;background:none;border:0;color:var(--text);font-size:1.6rem;cursor:pointer}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:80px 0 90px;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:-200px 0 auto -10%;
+    width:900px;height:900px;border-radius:50%;
+    background:radial-gradient(circle,rgba(34,197,94,.16),transparent 62%);
+    pointer-events:none;
+  }
+  .hero::after{
+    content:"";position:absolute;right:-200px;top:80px;
+    width:700px;height:700px;border-radius:50%;
+    background:radial-gradient(circle,rgba(14,165,233,.13),transparent 60%);
+    pointer-events:none;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;
+    position:relative;z-index:1;
+  }
+  .pill{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:7px 14px;border-radius:999px;
+    border:1px solid rgba(34,197,94,.3);
+    background:rgba(34,197,94,.09);
+    color:#6ee7a0;font-size:.78rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(34,197,94,.18)}
+  h1{
+    font-size:clamp(2.2rem,5vw,3.55rem);
+    line-height:1.08;letter-spacing:-.035em;font-weight:800;
+    margin:22px 0 18px;
+  }
+  h1 .grad{
+    background:linear-gradient(100deg,#4ade80,#38bdf8 70%);
+-webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .lead{color:var(--muted);font-size:1.06rem;max-width:53ch}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+  .hero-stats{
+    display:flex;gap:34px;margin-top:42px;padding-top:26px;
+    border-top:1px solid var(--line);flex-wrap:wrap;
+  }
+  .stat b{display:block;font-size:1.5rem;letter-spacing:-.02em}
+  .stat span{color:var(--muted);font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+
+  /* ---------- HERO VISUAL ---------- */
+  .visual{position:relative}
+  .chart-card{
+    background:linear-gradient(180deg,var(--card),#0d1526);
+    border:1px solid var(--line);border-radius:22px;
+    padding:22px;box-shadow:0 30px 80px -30px rgba(0,0,0,.9);
+  }
+  .chart-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}
+  .chart-head h4{font-size:1rem;font-weight:700}
+  .chart-head small{color:var(--muted);font-size:.78rem}
+  .up{color:var(--green);font-weight:700;font-size:.9rem;background:rgba(34,197,94,.12);padding:5px 10px;border-radius:8px}
+  svg.spark{width:100%;height:170px;display:block}
+  .ticker{
+    display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;
+  }
+  .tick{
+    flex:1;min-width:90px;background:rgba(255,255,255,.04);
+    border:1px solid var(--line);border-radius:12px;padding:10px 12px;
+  }
+  .tick small{display:block;color:var(--muted);font-size:.7rem;letter-spacing:.05em}
+  .tick b{font-size:.95rem}
+  .tick b.pos{color:var(--green)}
+  .tick b.neg{color:#f87171}
+  .floaty{
+    position:absolute;background:var(--card);border:1px solid var(--line);
+    border-radius:14px;padding:12px 16px;font-size:.8rem;
+    box-shadow:0 20px 40px -18px rgba(0,0,0,.9);
+    animation:float 5s ease-in-out infinite;
+  }
+  .floaty b{display:block;font-size:1rem}
+  .floaty small{color:var(--muted);font-size:.72rem}
+  .f1{left:-26px;bottom:-24px}
+  .f2{right:-18px;top:-22px;animation-delay:1.4s}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+  /* ---------- SECTION BASE ---------- */
+  section{padding:86px 0}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 54px}
+  .sec-head h2{font-size:clamp(1.7rem,3.4vw,2.4rem);letter-spacing:-.03em;line-height:1.15;margin:14px 0 12px}
+  .sec-head p{color:var(--muted)}
+  .kicker{color:var(--green);font-weight:700;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}
+
+  /* ---------- FEATURES ---------- */
+  .features{background:linear-gradient(180deg,transparent,var(--bg-2) 30%,transparent)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:28px 24px;transition:.25s;
+  }
+  .card:hover{transform:translateY(-4px);border-color:rgba(34,197,94,.35)}
+  .icon{
+    width:48px;height:48px;border-radius:13px;display:grid;place-items:center;
+    background:rgba(34,197,94,.12);color:var(--green);font-size:1.3rem;margin-bottom:18px;
+  }
+  .card h3{font-size:1.06rem;margin-bottom:8px;letter-spacing:-.01em}
+  .card p{color:var(--muted);font-size:.92rem}
+
+  /* ---------- COURSES ---------- */
+  .course-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .course{
+    background:linear-gradient(180deg,var(--card),#0e1728);
+    border:1px solid var(--line);border-radius:20px;padding:30px 26px;
+    display:flex;flex-direction:column;position:relative;transition:.25s;
+  }
+  .course:hover{transform:translateY(-5px);border-color:rgba(34,197,94,.4)}
+  .course.featured{border-color:rgba(34,197,94,.55);box-shadow:0 0 0 1px rgba(34,197,94,.15),0 24px 60px -30px rgba(34,197,94,.35)}
+  .badge{
+    position:absolute;top:-12px;left:26px;background:var(--green);color:#04210f;
+    font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+padding:5px 12px;border-radius:999px;
+  }
+  .course h3{font-size:1.2rem;letter-spacing:-.02em}
+  .course .tag{color:var(--muted);font-size:.84rem;margin:4px 0 16px}
+  .price{font-size:2rem;font-weight:800;letter-spacing:-.03em;margin-bottom:2px}
+  .price small{font-size:.8rem;color:var(--muted);font-weight:500}
+  .course ul{list-style:none;margin:20px 0 26px;display:grid;gap:11px;font-size:.9rem;color:var(--muted)}
+  .course li{display:flex;gap:10px;align-items:flex-start}
+  .check{color:var(--green);flex-shrink:0;font-weight:800}
+  .course .btn{width:100%;margin-top:auto}
+
+  /* ---------- WHY / SPLIT ---------- */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .split h2{font-size:clamp(1.7rem,3.2vw,2.3rem);letter-spacing:-.03em;line-height:1.15;margin:14px 0 18px}
+  .split p{color:var(--muted);margin-bottom:26px}
+  .list{display:grid;gap:18px}
+  .list-item{display:flex;gap:14px;align-items:flex-start}
+  .list-item .n{
+    flex-shrink:0;width:34px;height:34px;border-radius:10px;
+    background:rgba(34,197,94,.12);color:var(--green);
+    display:grid;place-items:center;font-weight:800;font-size:.85rem;
+  }
+  .list-item h4{font-size:.98rem;margin-bottom:2px}
+  .list-item p{font-size:.88rem;margin:0}
+  .mentor-card{
+    background:linear-gradient(180deg,var(--card),#0d1526);
+    border:1px solid var(--line);border-radius:22px;padding:34px;
+  }
+  .mentor-top{display:flex;align-items:center;gap:16px;margin-bottom:22px}
+  .avatar{
+    width:62px;height:62px;border-radius:50%;
+    background:linear-gradient(135deg,#22c55e,#0ea5e9);
+    display:grid;place-items:center;font-weight:800;color:#04210f;font-size:1.2rem;
+  }
+  .mentor-top h4{font-size:1.05rem}
+  .mentor-top small{color:var(--muted);font-size:.82rem}
+  .quote{color:#cbd5e1;font-style:italic;font-size:.95rem;line-height:1.7;border-left:3px solid var(--green);padding-left:16px}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .testi{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px;
+  }
+  .stars{color:var(--gold);letter-spacing:2px;margin-bottom:14px;font-size:.9rem}
+  .testi p{font-size:.92rem;color:#cbd5e1;margin-bottom:20px}
+  .testi-user{display:flex;align-items:center;gap:12px}
+  .testi-user .av{
+    width:40px;height:40px;border-radius:50%;background:rgba(34,197,94,.16);
+    color:var(--green);display:grid;place-items:center;font-weight:800;font-size:.85rem;
+  }
+  .testi-user b{font-size:.9rem;display:block}
+  .testi-user small{color:var(--muted);font-size:.76rem}
+
+  /* ---------- CTA ---------- */
+  .cta-band{
+    background:linear-gradient(120deg,rgba(34,197,94,.14),rgba(14,165,233,.12));
+    border:1px solid rgba(34,197,94,.25);border-radius:26px;
+    padding:56px 40px;text-align:center;position:relative;overflow:hidden;
+  }
+  .cta-band h2{font-size:clamp(1.7rem,3.4vw,2.4rem);letter-spacing:-.03em;margin-bottom:14px}
+  .cta-band p{color:#b6c2d9;max-width:52ch;margin:0 auto 30px}
+  .cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--line);padding:52px 0 30px;background:var(--bg-2)}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px;margin-bottom:40px}
+  .foot-grid h5{font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+  .foot-grid a{display:block;color:#cbd5e1;font-size:.9rem;margin-bottom:10px}
+  .foot-grid a:hover{color:var(--green)}
+  .foot-brand p{color:var(--muted);font-size:.9rem;margin-top:14px;max-width:34ch}
+  .foot-bottom{
+    border-top:1px solid var(--line);padding-top:22px;
+    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    color:var(--muted);font-size:.82rem;
+  }
+/* ---------- RESPONSIVE ---------- */
+  @media (max-width:960px){
+    .hero-grid,.split{grid-template-columns:1fr;gap:44px}
+    .cards,.course-grid,.testi-grid{grid-template-columns:1fr 1fr}
+    .foot-grid{grid-template-columns:1fr 1fr}
+    .nav-links,.nav-cta .btn-ghost{display:none}
+    .burger{display:block}
+    .nav-links.open{
+      display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;
+      background:var(--bg-2);border-bottom:1px solid var(--line);padding:20px 6%;gap:18px;
+    }
+    .visual{order:-1}
+  }
+  @media (max-width:640px){
+    .cards,.course-grid,.testi-grid,.foot-grid{grid-template-columns:1fr}
+    section{padding:62px 0}
+    .hero{padding:52px 0 70px}
+    .hero-stats{gap:22px}
+    .floaty{display:none}
+    .cta-band{padding:40px 22px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ======= HEADER ======= -->
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="#" class="logo">
+        <span class="logo-mark">M</span> Munafa Trading
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#features">Why Us</a>
+        <a href="#courses">Courses</a>
+        <a href="#mentor">Mentor</a>
+        <a href="#stories">Stories</a>
+      </div>
+      <div class="nav-cta">
+        <a href="https://t.me/+ficJtm08hk5iZWFl" class="btn btn-ghost">Explore Courses</a>
+        <a href="https://t.me/+ficJtm08hk5iZWFl" class="btn btn-primary">Enroll Now</a>
+        <button class="burger" id="burger" aria-label="Menu">☰</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ======= HERO ======= -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill"><span class="dot"></span> Professional Trading Institute</span>
+      <h1>Master the Stock Market with <span class="grad">Munafa Trading</span></h1>
+      <p class="lead">
+        Learn practical trading from market experts — live sessions, proven strategies,
+        risk management and real chart analysis. Start your journey from beginner to confident trader.
+      </p>
+      <div class="hero-actions">
+        <a href="https://t.me/+ficJtm08hk5iZWFl" class="btn btn-primary">Start Learning →</a>
+        <a href="https://t.me/+ficJtm08hk5iZWFl" class="btn btn-ghost">View Courses</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b>12,000+</b><span>Students Trained</span></div>
+        <div class="stat"><b>8+ Years</b><span>Market Experience</span></div>
+        <div class="stat"><b>4.8/5</b><span>Student Rating</span></div>
+      </div>
+    </div>
+
+    <div class="visual">
+      <div class="chart-card">
+        <div class="chart-head">
+          <div>
+            <h4>NIFTY 50</h4>
+            <small>Live Market Overview</small>
+          </div>
+          <span class="up">▲ 1.84%</span>
+        </div>
+        <svg class="spark" viewBox="0 0 400 170" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#22c55e" stop-opacity=".38"/>
+              <stop offset="100%" stop-color="#22c55e" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path d="M0,140 L30,128 L60,133 L90,110 L120,118 L150,92 L180,100 L210,74 L240,84 L270,58 L300,66 L330,38 L360,46 L400,18 L400,170 L0,170 Z" fill="url(#g1)"/>
+          <path d="M0,140 L30,128 L60,133 L90,110 L120,118 L150,92 L180,100 L210,74 L240,84 L270,58 L300,66 L330,38 L360,46 L400,18"
+                fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+          <circle cx="400" cy="18" r="4.5" fill="#22c55e"/>
+        </svg>
+        <div class="ticker">
+          <div class="tick"><small>BANKNIFTY</small><b class="pos">+1.42%</b></div>
+          <div class="tick"><small>RELIANCE</small><b class="pos">+0.86%</b></div>
+          <div class="tick"><small>TCS</small><b class="neg">-0.34%</b></div>
+        </div>
+      </div>
+      <div class="floaty f1"><b>📈 +24%</b><small>Avg. student portfolio growth</small></div>
+      <div class="floaty f2"><b>🎓 Certified</b><small>Expert-led curriculum</small></div>
+    </div>
+  </div>
+</section>
+<!-- ======= FEATURES ======= -->
+<section class="features" id="features">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">Why Munafa Trading</span>
+      <h2>Everything you need to trade with confidence</h2>
+      <p>We combine live market experience with structured learning so you build real skills — not just theory.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">📊</div>
+        <h3>Live Market Sessions</h3>
+        <p>Watch real trades and chart analysis in live markets with instant Q&A from mentors.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🧠</div>
+        <h3>Proven Strategies</h3>
+        <p>Price action, options, and risk-management frameworks tested across market cycles.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🛡️</div>
+        <h3>Risk Management First</h3>
+        <p>Learn to protect capital with position sizing, stop-loss discipline and psychology.</p>
+      </div>
+      <div class="card">
+        <div class="icon">👨‍🏫</div>
+        <h3>Expert Mentors</h3>
+        <p>Learn directly from traders with 8+ years of real market experience.</p>
+      </div>
+      <div class="card">
+        <div class="icon">💬</div>
+        <h3>Community Support</h3>
+        <p>Join a private community of learners for discussions, doubts and trade reviews.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📱</div>
+        <h3>Lifetime Access</h3>
+        <p>Revisit recordings and course material anytime, on any device.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= COURSES ======= -->
+<section id="courses">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">Our Programs</span>
+      <h2>Choose the course that fits your goals</h2>
+      <p>From your first trade to advanced options strategies — structured paths for every level.</p>
+    </div>
+    <div class="course-grid">
+      <div class="course">
+        <h3>Beginner Foundation</h3>
+        <p class="tag">Perfect for first-time traders</p>
+        <div class="price">₹4,999<small> / one-time</small></div>
+        <ul>
+          <li><span class="check">✓</span> Market basics &amp; terminology</li>
+          <li><span class="check">✓</span> Chart reading &amp; candlesticks</li>
+          <li><span class="check">✓</span> Introduction to risk management</li>
+          <li><span class="check">✓</span> 30+ recorded lessons</li>
+        </ul>
+        <a href="#enroll" class="btn btn-ghost">Enroll Now</a>
+      </div>
+
+      <div class="course featured">
+        <span class="badge">Most Popular</span>
+        <h3>Advanced Trading Pro</h3>
+        <p class="tag">For serious traders</p>
+        <div class="price">₹12,999<small> / one-time</small></div>
+        <ul>
+          <li><span class="check">✓</span> Price action &amp; supply-demand</li>
+          <li><span class="check">✓</span> Options strategies &amp; hedging</li>
+          <li><span class="check">✓</span> Live market sessions weekly</li>
+          <li><span class="check">✓</span> Trading psychology &amp; journaling</li>
+          <li><span class="check">✓</span> Private community access</li>
+        </ul>
+        <a href="https://t.me/+ficJtm08hk5iZWFl" class="btn btn-primary">Enroll Now</a>
+      </div>
+
+      <div class="course">
+        <h3>Options Mastery</h3>
+        <p class="tag">Specialized derivatives program</p>
+        <div class="price">₹9,499<small> / one-time</small></div>
+        <ul>
+          <li><span class="check">✓</span> Option Greeks simplified</li>
+          <li><span class="check">✓</span> Income &amp; directional strategies</li>
+          <li><span class="check">✓</span> Backtesting &amp; adjustments</li>
+          <li><span class="check">✓</span> Live case studies</li>
+        </ul>
+        <a href="https://t.me/+ficJtm08hk5iZWFl" class="btn btn-ghost">Enroll Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= MENTOR / SPLIT ======= -->
+<section id="mentor">
+  <div class="wrap split">
+    <div>
+      <span class="kicker">Learn from Experience</span>
+      <h2>Mentorship that goes beyond theory</h2>
+      <p>Our mentors have navigated bull runs, corrections and sideways markets. You learn what actually works — with discipline and clarity.</p>
+      <div class="list">
+        <div class="list-item">
+          <div class="n">01</div>
+          <div>
+            <h4>Step-by-step roadmap</h4>
+            <p>Clear milestones from beginner to advanced, so you always know what to learn next.</p>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="n">02</div>
+          <div>
+            <h4>Live doubt clearing</h4>
+            <p>Weekly live sessions where mentors review your charts and answer questions.</p>
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="n">03</div>
+          <div>
+            <h4>Practical trade reviews</h4>
+            <p>Learn from real trade examples — wins, losses and the lessons behind them.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mentor-card">
+      <div class="mentor-top">
+        <div class="avatar">MT</div>
+        <div>
+          <h4>Munafa Trading Mentor Team</h4>
+          <small>Market professionals · 8+ years combined experience</small>
+        </div>
+      </div>
+      <p class="quote">
+        “We don’t just teach trading — we build disciplined, independent traders who understand risk before reward.”
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ======= TESTIMONIALS ======= -->
+<section id="stories">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">Student Stories</span>
+      <h2>Real people, real progress</h2>
+      <p>Our students come from all backgrounds — and build skills that last.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi">
+        <div class="stars">★★★★★</div>
+        <p>“The live sessions changed how I look at charts. Risk management is now my strongest habit.”</p>
+        <div class="testi-user">
+          <div class="av">RS</div>
+          <div><b>Rohit S.</b><small>Advanced Trading Pro</small></div>
+        </div>
+      </div>
+      <div class="testi">
+        <div class="stars">★★★★★</div>
+        <p>“Clear explanations, no hype, real examples. Finally a course that respects beginners.”</p>
+        <div class="testi-user">
+          <div class="av">PK</div>
+          <div><b>Priya K.</b><small>Beginner Foundation</small></div>
+        </div>
+      </div>
+      <div class="testi">
+        <div class="stars">★★★★★</div>
+        <p>“Options Mastery simplified Greeks and adjustments in a way no YouTube video could.”</p>
+        <div class="testi-user">
+          <div class="av">AM</div>
+          <div><b>Arjun M.</b><small>Options Mastery</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= CTA ======= -->
+<section id="enroll">
+  <div class="wrap">
+    <div class="cta-band">
+      <h2>Ready to master the stock market?</h2>
+      <p>Join Munafa Trading and get structured, practical, mentor-led training — built for real markets.</p>
+      <div class="cta-actions">
+        <a href="https://t.me/+ficJtm08hk5iZWFl" class="btn btn-primary">Enroll Today →</a>
+        <a href="https://t.me/+ficJtm08hk5iZWFl" class="btn btn-ghost">Talk to a Mentor</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= FOOTER ======= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#" class="logo"><span class="logo-mark">M</span> Munafa Trading</a>
+        <p>Professional trading institute helping students master the stock market with discipline and clarity.</p>
+      </div>
+      <div>
+        <h5>Programs</h5>
+<a href="#courses">Beginner Foundation</a>
+        <a href="#courses">Advanced Trading Pro</a>
+        <a href="#courses">Options Mastery</a>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <a href="#features">Why Us</a>
+        <a href="#mentor">Mentor</a>
+        <a href="#stories">Student Stories</a>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <a href="https://www.instagram.com/munafa_trading">Instagram</a>
+        <a href="https://t.me/+ficJtm08hk5iZWFl">YouTube</a>
+        <a href="https://t.me/+ficJtm08hk5iZWFl">Telegram</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2025 Munafa Trading. All rights reserved.</span>
+      <span>Investments in markets are subject to risk. Educational purposes only.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+    burger.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+  });
+
+  // Close menu on link click (mobile)
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      burger.textContent = '☰';
+    });
+  });
+</script>
+
+</body>
+</html>
+`
+
+What's included:
+
+· Dark, modern finance-style theme with green accents
+· Sticky navbar + mobile menu
+· Hero with animated chart card and stats
+· Features grid, 3 pricing courses (one featured), mentor section, testimonials, CTA band, and footer
+· Fully responsive and no external JS dependencies
+
+Quick edits: swap the name/logo text, update prices and course names, and replace the placeholder href="#" links with your real enrollment/contact URLs. Want me to adjust the color scheme or add a contact form section?
